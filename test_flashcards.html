@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard App - Test Yourself</title>
+</head>
+<body>
+    <h1>Flashcard App</h1>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('add_flashcard') }}">Add Flashcard</a>
+        <a href="{{ url_for('flashcard_results') }}">Your Results</a>
+    </nav>
+
+    <h2>Test Yourself</h2>
+    <div id="flashcard-test">
+        <p><strong>Topic:</strong> {{ flashcard['topic'] }}</p>
+        <p><strong>Question:</strong> {{ flashcard['question'] }}</p>
+        
+        <form method="POST">
+            <input type="text" name="answer" placeholder="Your answer" required>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard App - Results</title>
+</head>
+<body>
+    <h1>Flashcard App</h1>
+    <nav>
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('add_flashcard') }}">Add Flashcard</a>
+        <a href="{{ url_for('test_flashcards') }}">Test Yourself</a>
+    </nav>
+
+    <h2>Your Test Results</h2>
+    <p>Total Attempts: {{ total }}</p>
+    <p>Correct Answers: {{ correct }}</p>
+    <p>Accuracy: {{ accuracy }}%</p>
+</body>
+</html>

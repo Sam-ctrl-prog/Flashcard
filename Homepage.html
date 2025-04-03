@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flashcard App - Home</title>
+</head>
+<body>
+    <h1>Flashcard App</h1>
+    <nav>
+        <a href="{{ url_for('add_flashcard') }}">Add Flashcard</a>
+        <a href="{{ url_for('test_flashcards') }}">Test Yourself</a>
+        <a href="{{ url_for('flashcard_results') }}">Your Results</a>
+    </nav>
+
+    <h2>Your Flashcards</h2>
+    <div id="flashcard-list">
+        {% if flashcards %}
+            <ul>
+                {% for flashcard in flashcards %}
+                    <li><strong>{{ flashcard['topic'] }}:</strong> {{ flashcard['question'] }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No flashcards added yet.</p>
+        {% endif %}
+    </div>
+</body>
+</html>

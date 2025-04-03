@@ -1,0 +1,13 @@
+{
+    "flashcards": [
+        {
+            "topic": "Math",
+            "question": "What is 2 + 2?",
+            "answer": "4"
+        }
+    ],
+    "results": {
+        "correct": 0,
+        "total": 0
+    }
+}
