@@ -1,5 +1,6 @@
 import os
 import json
+import random
 from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
@@ -40,7 +41,7 @@ def add_flashcard():
         data['flashcards'].append({'topic': topic, 'question': question, 'answer': answer})
         save_flashcards(data)
         
-        return redirect(url_for('Homepage'))
+        return redirect(url_for('index'))  # Update redirect to 'index'
     
     return render_template('add_flashcard.html')
 
