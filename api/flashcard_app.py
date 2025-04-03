@@ -1,22 +1,28 @@
-from flask import Flask, render_template, request, redirect, url_for
+import os
 import json
-import random
+from flask import Flask, render_template, request, redirect, url_for
 
 app = Flask(__name__)
 
-# Load flashcards from the JSON file
+# Ensure flashcards.json exists
 def load_flashcards():
+    if not os.path.exists('flashcards.json'):
+        return {"flashcards": [], "results": {"correct": 0, "total": 0}}
+    
     try:
         with open('flashcards.json', 'r') as file:
             data = json.load(file)
         return data
-    except FileNotFoundError:
+    except Exception as e:
+        print(f"Error loading flashcards: {e}")
         return {"flashcards": [], "results": {"correct": 0, "total": 0}}
 
-# Save flashcards to the JSON file
 def save_flashcards(data):
-    with open('flashcards.json', 'w') as file:
-        json.dump(data, file)
+    try:
+        with open('flashcards.json', 'w') as file:
+            json.dump(data, file)
+    except Exception as e:
+        print(f"Error saving flashcards: {e}")
 
 @app.route('/')
 def index():
@@ -41,7 +47,7 @@ def add_flashcard():
 @app.route('/test_flashcards', methods=['GET', 'POST'])
 def test_flashcards():
     data = load_flashcards()
-    flashcards = data['flashcard']
+    flashcards = data['flashcards']
     
     if len(flashcards) == 0:
         return redirect(url_for('add_flashcard'))
