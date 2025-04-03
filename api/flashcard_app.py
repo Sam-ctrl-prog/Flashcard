@@ -21,7 +21,7 @@ def save_flashcards(data):
 @app.route('/')
 def index():
     data = load_flashcards()
-    return render_template('index.html', flashcards=data['flashcards'])
+    return render_template('Homepage.html', flashcards=data['flashcards'])
 
 @app.route('/add_flashcard', methods=['GET', 'POST'])
 def add_flashcard():
@@ -34,14 +34,14 @@ def add_flashcard():
         data['flashcards'].append({'topic': topic, 'question': question, 'answer': answer})
         save_flashcards(data)
         
-        return redirect(url_for('index'))
+        return redirect(url_for('Homepage'))
     
     return render_template('add_flashcard.html')
 
 @app.route('/test_flashcards', methods=['GET', 'POST'])
 def test_flashcards():
     data = load_flashcards()
-    flashcards = data['flashcards']
+    flashcards = data['flashcard']
     
     if len(flashcards) == 0:
         return redirect(url_for('add_flashcard'))
@@ -61,13 +61,13 @@ def test_flashcards():
     
     return render_template('test_flashcards.html', flashcard=random_flashcard)
 
-@app.route('/flashcard_results')
+@app.route('/result_flashcard')
 def flashcard_results():
     data = load_flashcards()
     correct = data['results']['correct']
     total = data['results']['total']
     accuracy = (correct / total * 100) if total > 0 else 0
-    return render_template('flashcard_results.html', correct=correct, total=total, accuracy=accuracy)
+    return render_template('result_flashcard.html', correct=correct, total=total, accuracy=accuracy)
 
 if __name__ == '__main__':
     app.run(debug=True)
